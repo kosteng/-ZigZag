@@ -7,6 +7,7 @@ public class ViewSphere : MonoBehaviour
     private bool _direction = false;
     private bool _start = false;
     private int _leftMouseButton = 0;
+
     public void Move(float deltaTime)
     {
 
@@ -23,7 +24,7 @@ public class ViewSphere : MonoBehaviour
 
         if (_start && !_direction)
         {
-                transform.Translate(Vector3.right * deltaTime * _speed);
+            transform.Translate(Vector3.right * deltaTime * _speed);
         }       
     }
 }

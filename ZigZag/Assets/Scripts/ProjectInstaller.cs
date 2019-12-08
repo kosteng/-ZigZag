@@ -12,6 +12,10 @@ public class ProjectInstaller : MonoBehaviour
         _infrastructure = new ProjectInfrastructure(_monoBehaviourView);
     }
 
+    private void Start()
+    {
+        _infrastructure.Start();
+    }
     private void Update()
     {
         _infrastructure.Update(Time.deltaTime);
