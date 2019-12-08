@@ -4,10 +4,10 @@ public class ViewTile : MonoBehaviour
 {
     public void Generate ()
     {
-        for (int i = -1; i <= 1; i++)
-            for (int j = -1; j <= 1; j++)
+        for (int x = -1; x <= 1; x++)
+            for (int z = -1; z <= 1; z++)
             {
-                var tile = Instantiate(gameObject, new Vector3(j, 0, i), Quaternion.identity);     
+                var tile = Instantiate(gameObject, new Vector3(x, 0, z), Quaternion.identity);     
             }
     }
 }
