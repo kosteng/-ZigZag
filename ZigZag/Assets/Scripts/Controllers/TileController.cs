@@ -11,8 +11,8 @@
     }
     public void Start ()
     {
-    //    _viewTile.Start();
-    //    for (int i = 0; i <= 5; i++)
+        _viewTile.Start();
+        for (int i = 0; i <= 5; i++)
             _pool.AddObject(_factory.Create());
     }
 }

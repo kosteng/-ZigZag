@@ -10,10 +10,11 @@
 
     public ProjectInfrastructure(MonoBehaviourView monoBehaviourView)
     {
+        _poolTile = new Pool();
         _monoBehaviourView = monoBehaviourView;
         _sphereController = new SphereController(_monoBehaviourView.ViewSphere);
         _tileController = new TileController(_monoBehaviourView.ViewTile, _monoBehaviourView.Factory, _poolTile);
-        _poolTile = new Pool();
+
     }
     public void Start ()
     {
