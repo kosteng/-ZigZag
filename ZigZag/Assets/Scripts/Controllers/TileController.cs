@@ -13,6 +13,6 @@
     {
         _viewTile.Start();
         for (int i = 0; i <= 5; i++)
-            _pool.AddObject(_factory.Create());
+            _pool.pool.Push(_factory.Create());
     }
 }
