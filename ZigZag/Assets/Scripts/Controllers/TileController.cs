@@ -1,12 +1,15 @@
 ﻿public class TileController 
 {
     private readonly ViewTile _viewTile;
-    public TileController (ViewTile viewTile)
-    {
+    private readonly Factory _factory;
+    public TileController (ViewTile viewTile, Factory factory)
+    { 
         _viewTile = viewTile;
+        _factory = factory;
     }
     public void Start ()
     {
-        _viewTile.Generate();
+        _viewTile.Start();
+        _factory.Create();
     }
 }
