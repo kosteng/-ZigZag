@@ -13,7 +13,7 @@
     public void Start ()
     {
         _viewTile.Start();
-        _roadBuilder.Build();
+        _roadBuilder.Coordinator();
         //for (int i = 0; i <= 5; i++)
            // _pool.poolStack.Push(_factory.Create());
     }

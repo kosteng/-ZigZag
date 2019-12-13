@@ -23,4 +23,9 @@ public class RoadBuilder
         }
         
     }
+    public void Coordinator ()
+    {
+        var coor = Build();
+        coor.transform.position = Vector3.zero;
+    }
 }
