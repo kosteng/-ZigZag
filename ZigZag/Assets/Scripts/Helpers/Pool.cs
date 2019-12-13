@@ -4,7 +4,10 @@ public class Pool
 {
     private Factory _factory;
     public Stack<GameObject> poolStack = new Stack<GameObject>();
-
+    public Pool (Factory factory)
+    {
+        _factory = factory;
+    }
     public GameObject GetTile ()
     {
         if (this == null)
@@ -14,6 +17,7 @@ public class Pool
         }
         else
         {
+            GetTileToFactory();
             return poolStack.Pop();
         }
 

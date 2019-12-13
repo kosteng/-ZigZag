@@ -11,9 +11,10 @@
 
     public ProjectInfrastructure(MonoBehaviourView monoBehaviourView)
     {
-        _poolTile = new Pool();
-        _roadBuilder = new RoadBuilder(_poolTile);
         _monoBehaviourView = monoBehaviourView;
+        _poolTile = new Pool(_monoBehaviourView.Factory);
+        _roadBuilder = new RoadBuilder(_poolTile);
+        
         _sphereController = new SphereController(_monoBehaviourView.ViewSphere);
         _tileController = new TileController(_monoBehaviourView.ViewTile, _monoBehaviourView.Factory, _roadBuilder);
 

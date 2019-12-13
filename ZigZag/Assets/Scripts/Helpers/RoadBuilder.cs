@@ -9,7 +9,7 @@ public class RoadBuilder
         _pool = pool;
     }
 
-    public GameObject BuildRoader ()
+    public GameObject Build ()
     {
         
         direсtion = !direсtion;
