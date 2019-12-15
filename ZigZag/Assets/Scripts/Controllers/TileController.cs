@@ -1,20 +1,28 @@
-﻿public class TileController 
+﻿using UnityEngine;
+public class TileController 
 {
     private readonly ViewTile _viewTile;
-    private readonly Factory _factory;
     private readonly RoadBuilder _roadBuilder;
 
-    public TileController (ViewTile viewTile, Factory factory, RoadBuilder roadBuilder)
+    public TileController (ViewTile viewTile, RoadBuilder roadBuilder)
     { 
         _viewTile = viewTile;
-        _factory = factory;
         _roadBuilder = roadBuilder;
     }
-    public void Start ()
+    
+    public void Start()
     {
+        var i = 0;
         _viewTile.Start();
-        _roadBuilder.Coordinator();
-        //for (int i = 0; i <= 5; i++)
-           // _pool.poolStack.Push(_factory.Create());
+        _roadBuilder.BuildStartingPlatform(1, 1);
+
+        
+
+        while (i < 100)
+        {
+            i++;
+            var rnd = Random.Range(0, 2);
+            _roadBuilder.BuildRoad(1, rnd);
+        }
     }
 }

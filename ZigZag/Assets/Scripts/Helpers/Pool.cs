@@ -10,9 +10,8 @@ public class Pool
     }
     public GameObject GetTile ()
     {
-        GetTileFromFactory();
-        GetTileFromFactory();
-        if (this == null)
+
+        if (poolStack.Count == 0)
         {
             GetTileFromFactory();        
             return poolStack.Pop();

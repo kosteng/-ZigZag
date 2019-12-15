@@ -16,7 +16,7 @@
         _roadBuilder = new RoadBuilder(_poolTile);
         
         _sphereController = new SphereController(_monoBehaviourView.ViewSphere);
-        _tileController = new TileController(_monoBehaviourView.ViewTile, _monoBehaviourView.Factory, _roadBuilder);
+        _tileController = new TileController(_monoBehaviourView.ViewTile, _roadBuilder);
 
     }
     public void Start ()
