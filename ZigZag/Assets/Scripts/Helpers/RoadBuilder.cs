@@ -1,63 +1,53 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class RoadBuilder 
 {
-    private int _lastPostionZ;
-    private int _lastPostionX;
+    private Vector3 _lostPosition;
     private Pool _pool;
     private bool direсtion = false;
+    public List<GameObject> tilesOnScene;
+
     public RoadBuilder (Pool pool)
     {
+        tilesOnScene = new List<GameObject>();
         _pool = pool;
     }
 
     public GameObject Build ()
     {
-        
-        direсtion = !direсtion;
-        if (direсtion)
-        {
-            return _pool.GetTile();
-        }
-        else
-        {
-            return _pool.GetTile();
-        }        
+        return _pool.GetTile();
     }
+
     public void BuildStartingPlatform(int countX, int countZ)
     {
         for (int x = -countX; x <= countX; x++)
             for (int z = -countZ; z <= countZ; z++)
             {
-                var coor = Build();
-                coor.transform.position = new Vector3(x, 0, z);
-                _lastPostionZ = z;
-                _lastPostionX = 0;
-                
+                tilesOnScene.Add(Build());
+                tilesOnScene.LastOrDefault().transform.position = new Vector3(x, 0, z);
+                _lostPosition = tilesOnScene.LastOrDefault().transform.position;               
             }
     }
+
     public void BuildRoad (int count, int direction)
     {
         if (direction == 0)
         for (int i = 1; i <= count; i++)
         {
-            _lastPostionZ++;
-            var coor = Build();
-            coor.transform.position = new Vector3(_lastPostionX, 0, _lastPostionZ);
+            _lostPosition.z++;
+            tilesOnScene.Add(Build());
+            tilesOnScene.LastOrDefault().transform.position = _lostPosition;
         }
         else
         {
             for (int i = 1; i <= count; i++)
             {
-                _lastPostionX++;
-                var coor = Build();
-                coor.transform.position = new Vector3(_lastPostionX, 0, _lastPostionZ);
+                _lostPosition.x++;
+                tilesOnScene.Add(Build());
+                tilesOnScene.LastOrDefault().transform.position = _lostPosition;
             }
         }
-    }
-    public void Coordinator ()
-    {
-        var coor = Build();
-        coor.transform.position = Vector3.zero;
     }
 }
