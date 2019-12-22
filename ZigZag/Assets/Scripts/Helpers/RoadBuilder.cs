@@ -5,17 +5,16 @@ using UnityEngine;
 public class RoadBuilder 
 {
     private Vector3 _lostPosition;
-    private Pool _pool;
-    private bool direсtion = false;
-    public List<GameObject> tilesOnScene;
+    public Pool _pool;
+    public List<ViewTile> tilesOnScene;
 
     public RoadBuilder (Pool pool)
     {
-        tilesOnScene = new List<GameObject>();
+        tilesOnScene = new List<ViewTile>();
         _pool = pool;
     }
 
-    public GameObject Build ()
+    public ViewTile Build ()
     {
         return _pool.GetTile();
     }
@@ -49,5 +48,9 @@ public class RoadBuilder
                 tilesOnScene.LastOrDefault().transform.position = _lostPosition;
             }
         }
+    }
+    public void RemoveAtToList (int i)
+    {
+        tilesOnScene.RemoveAt(i);
     }
 }

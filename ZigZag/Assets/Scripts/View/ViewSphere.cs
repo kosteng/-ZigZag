@@ -2,7 +2,6 @@
 
 public class ViewSphere : MonoBehaviour
 {
-    [SerializeField] bool use = false;
     [SerializeField] private float _speed = 1f;
     private bool _direction = false;
     private bool _start = false;
@@ -26,15 +25,6 @@ public class ViewSphere : MonoBehaviour
         if (_start && !_direction)
         {
             transform.Translate(Vector3.right * deltaTime * _speed);
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Tile")
-        {
-            use = true;
-            countUseTile++;
         }
     }
 }

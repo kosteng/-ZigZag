@@ -3,12 +3,12 @@ using UnityEngine;
 public class Pool 
 {
     private Factory _factory;
-    public Stack<GameObject> poolStack = new Stack<GameObject>();
+    public Stack<ViewTile> poolStack = new Stack<ViewTile>();
     public Pool (Factory factory)
     {
         _factory = factory;
     }
-    public GameObject GetTile ()
+    public ViewTile GetTile ()
     {
 
         if (poolStack.Count == 0)

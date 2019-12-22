@@ -26,5 +26,6 @@
     public void Update(float deltaTime)
     {
         _sphereController.OnUpdate(deltaTime);
+        _tileController.Update(deltaTime);
     }
 }
