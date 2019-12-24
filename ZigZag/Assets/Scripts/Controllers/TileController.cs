@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Linq;
+
 public class TileController 
 {
     private readonly ViewTile _viewTile;
@@ -14,44 +14,42 @@ public class TileController
     
     public void Start()
     {
-        var i = 0;
         _viewTile.Start();
         _roadBuilder.BuildStartingPlatform(1, 1);
-
-        
-
-        while (i < 100)
-        {
-            i++;
-            var rnd = Random.Range(0, 2);
-            _roadBuilder.BuildRoad(1, rnd);
-        }
+        CreateRoad(80);
     }
+
     public void Update(float deltaTime)
     {
         _timer += deltaTime*2;
         if (_timer >= 5)
         {
-            Debug.Log("Pool: " + _roadBuilder._pool.poolStack.Count);
-           // Debug.Log("Objects scene: " + _roadBuilder.tilesOnScene.Count);
-            var j = 0;
+            Debug.Log("Pool: " + _roadBuilder._pool.poolQueue.Count);
             _timer = 0;
-            for (int i = 0; i < _roadBuilder.tilesOnScene.Count; i++)
-            {
-                if (_roadBuilder.tilesOnScene[i].use)
-                {
-                    _roadBuilder.tilesOnScene[i].use = !_roadBuilder.tilesOnScene[i].use;
-                    _roadBuilder._pool.poolStack.Push(_roadBuilder.tilesOnScene[i]);
-                    _roadBuilder.RemoveAtToList(i);                 
-                }
-            }
+            BackToPool();
+            CreateRoad(50);
+        }
+    }
 
-            while (j < 1)
+    private void BackToPool()
+    {
+        for (int i = 0; i < _roadBuilder.tilesOnScene.Count; i++)
+        {
+            if (_roadBuilder.tilesOnScene[i].use)
             {
-                j++;
-                var rnd = Random.Range(0, 2);
-                _roadBuilder.BuildRoad(1, rnd);
+                _roadBuilder.tilesOnScene[i].use = !_roadBuilder.tilesOnScene[i].use;
+                _roadBuilder._pool.poolQueue.Enqueue(_roadBuilder.tilesOnScene[i]);
+                _roadBuilder.RemoveAtToList(i);
             }
+        }
+    }
+
+    private void CreateRoad(int count)
+    {
+        while (_roadBuilder.tilesOnScene.Count < count)
+        {
+            var rnd = Random.Range(0, 2);
+            _roadBuilder.BuildRoad(1, rnd);
         }
     }
 }

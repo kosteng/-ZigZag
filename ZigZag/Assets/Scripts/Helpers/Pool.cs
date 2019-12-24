@@ -3,7 +3,7 @@ using UnityEngine;
 public class Pool 
 {
     private Factory _factory;
-    public Stack<ViewTile> poolStack = new Stack<ViewTile>();
+    public Queue<ViewTile> poolQueue = new Queue<ViewTile>();
     public Pool (Factory factory)
     {
         _factory = factory;
@@ -11,20 +11,20 @@ public class Pool
     public ViewTile GetTile ()
     {
 
-        if (poolStack.Count == 0)
+        if (poolQueue.Count == 0)
         {
             GetTileFromFactory();        
-            return poolStack.Pop();
+            return poolQueue.Dequeue();
         }
         else
         {
-            return poolStack.Pop();
+            return poolQueue.Dequeue();
         }
         
     }
     private void GetTileFromFactory()
     {
-        poolStack.Push(_factory.Create());
+        poolQueue.Enqueue(_factory.Create());
     }
 
 }
