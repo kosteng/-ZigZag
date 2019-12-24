@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RoadBuilder 
 {
+    private bool _direction = true;
     private Vector3 _lostPosition;
     public Pool _pool;
     public List<ViewTile> tilesOnScene;
-
+    
     public RoadBuilder (Pool pool)
     {
         tilesOnScene = new List<ViewTile>();
@@ -30,16 +31,17 @@ public class RoadBuilder
             }
     }
 
-    public void BuildRoad (int count, int direction)
+    public void BuildRoad (int count)
     {
-        if (direction == 0)
+        if (_direction)
         for (int i = 1; i <= count; i++)
         {
             _lostPosition.z++;
             tilesOnScene.Add(Build());
             tilesOnScene.LastOrDefault().transform.position = _lostPosition;
+
         }
-        else
+        if(!_direction)
         {
             for (int i = 1; i <= count; i++)
             {
@@ -48,6 +50,7 @@ public class RoadBuilder
                 tilesOnScene.LastOrDefault().transform.position = _lostPosition;
             }
         }
+        _direction = !_direction;
     }
 
     public void RemoveAtToList (int i)

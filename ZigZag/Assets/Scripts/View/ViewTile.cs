@@ -2,13 +2,7 @@
 
 public class ViewTile : MonoBehaviour
 {
-    [SerializeField] private GameObject _parent;
     public bool use = false;
-    public void Start()
-    {
-        _parent = GameObject.FindGameObjectWithTag("Parent");
-        transform.SetParent(_parent.transform);
-    }
 
     private void OnCollisionExit(Collision collision)
     {
@@ -17,5 +11,4 @@ public class ViewTile : MonoBehaviour
             use = !use;
         }
     }
- 
 }

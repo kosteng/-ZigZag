@@ -14,20 +14,19 @@ public class TileController
     
     public void Start()
     {
-        _viewTile.Start();
         _roadBuilder.BuildStartingPlatform(1, 1);
         CreateRoad(80);
     }
 
     public void Update(float deltaTime)
     {
-        _timer += deltaTime*2;
+        _timer += deltaTime;
         if (_timer >= 5)
         {
             Debug.Log("Pool: " + _roadBuilder._pool.poolQueue.Count);
             _timer = 0;
             BackToPool();
-            CreateRoad(50);
+            CreateRoad(80);
         }
     }
 
@@ -48,8 +47,9 @@ public class TileController
     {
         while (_roadBuilder.tilesOnScene.Count < count)
         {
-            var rnd = Random.Range(0, 2);
-            _roadBuilder.BuildRoad(1, rnd);
+            var rndDirection = Random.Range(0, 2);
+            var rndCountTile = Random.Range(1, 5);
+            _roadBuilder.BuildRoad(rndCountTile);
         }
     }
 }
