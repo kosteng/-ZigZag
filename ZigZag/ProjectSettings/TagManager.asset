@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Parent
   - Tile
+  - BorderBackToPool
   layers:
   - Default
   - TransparentFX

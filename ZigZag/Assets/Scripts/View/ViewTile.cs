@@ -4,11 +4,10 @@ public class ViewTile : MonoBehaviour
 {
     public bool use = false;
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
-        {
+        if (other.tag == "BorderBackToPool")
             use = !use;
-        }
     }
+    
 }

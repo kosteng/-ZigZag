@@ -24,7 +24,7 @@ public class Pool
     }
     private void GetTileFromFactory()
     {
-        poolQueue.Enqueue(_factory.Create());
+        poolQueue.Enqueue(_factory.CreateTile());
     }
 
 }

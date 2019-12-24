@@ -2,17 +2,28 @@
 
 public class Factory : MonoBehaviour
 {
-    [SerializeField] private GameObject _parentTile;
-    [SerializeField] private GameObject _parentCoin;
-    private int count = 0;
-    [SerializeField] private ViewTile _prefab;
-    public ViewTile Create ()
+    [SerializeField] private GameObject _parent;
+    [SerializeField] private ViewTile _tile;
+    [SerializeField] private ViewTile _coin;
+
+    public ViewTile CreateTile()
     {
-        count++;
-        Debug.Log("Factory" + count);
-        var tile = Instantiate(_prefab, new Vector3(0,10,0), Quaternion.identity);
-        _parentTile = GameObject.FindGameObjectWithTag("Parent");
-        tile.transform.SetParent(_parentTile.transform);
-        return tile;
+        var tile = Instantiate(_tile, new Vector3(0, 10, 0), Quaternion.identity);
+        SetParent(tile);
+        return tile;  
+    }
+
+    public ViewTile CreateCoin()
+    {
+        var coin = Instantiate(_coin, new Vector3(0, 10, 0), Quaternion.identity);
+        SetParent(coin);
+        return coin;
+    }
+
+    private void SetParent(ViewTile child)
+    {
+        if (_parent == null)
+          _parent = GameObject.FindGameObjectWithTag("Parent");
+        child.transform.SetParent(_parent.transform);
     }
 }

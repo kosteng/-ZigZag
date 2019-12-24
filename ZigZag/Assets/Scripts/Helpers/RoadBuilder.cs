@@ -27,7 +27,8 @@ public class RoadBuilder
             {
                 tilesOnScene.Add(Build());
                 tilesOnScene.LastOrDefault().transform.position = new Vector3(x, 0, z);
-                _lostPosition = tilesOnScene.LastOrDefault().transform.position;               
+                _lostPosition = tilesOnScene.LastOrDefault().transform.position;
+                
             }
     }
 
