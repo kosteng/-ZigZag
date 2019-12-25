@@ -22,8 +22,6 @@ public class Factory : MonoBehaviour
 
     private void SetParent(ViewTile child)
     {
-        if (_parent == null)
-          _parent = GameObject.FindGameObjectWithTag("Parent");
         child.transform.SetParent(_parent.transform);
     }
 }

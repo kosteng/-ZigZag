@@ -2,13 +2,11 @@
 
 public class TileController 
 {
-    private readonly ViewTile _viewTile;
     private readonly RoadBuilder _roadBuilder;
     private float _timer = 0;
 
-    public TileController (ViewTile viewTile, RoadBuilder roadBuilder)
+    public TileController (RoadBuilder roadBuilder)
     { 
-        _viewTile = viewTile;
         _roadBuilder = roadBuilder;
     }
     
@@ -23,7 +21,7 @@ public class TileController
         _timer += deltaTime;
         if (_timer >= 5)
         {
-            Debug.Log("Pool: " + _roadBuilder._pool.poolQueue.Count);
+            Debug.Log("Pool: " + _roadBuilder.poolTile.poolQueue.Count);
             _timer = 0;
             BackToPool();
             CreateRoad(80);
@@ -37,7 +35,7 @@ public class TileController
             if (_roadBuilder.tilesOnScene[i].use)
             {
                 _roadBuilder.tilesOnScene[i].use = !_roadBuilder.tilesOnScene[i].use;
-                _roadBuilder._pool.poolQueue.Enqueue(_roadBuilder.tilesOnScene[i]);
+                _roadBuilder.poolTile.poolQueue.Enqueue(_roadBuilder.tilesOnScene[i]);
                 _roadBuilder.RemoveAtToList(i);
             }
         }
