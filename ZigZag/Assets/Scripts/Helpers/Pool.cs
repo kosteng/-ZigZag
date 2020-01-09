@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+
 public class Pool 
 {
     private Factory _factory;
     public Queue<ViewTile> poolQueue = new Queue<ViewTile>();
 
-    public Pool (Factory factory)
+    public Pool(Factory factory)
     {
         _factory = factory;
     }
-    public ViewTile GetTile ()
+
+    public ViewTile GetObjectFromPool()
     {
         if (poolQueue.Count == 0)
         {
-            GetTileFromFactory();        
+            GetObjectFromFactory();        
             return poolQueue.Dequeue();
         }
         else
@@ -22,7 +23,7 @@ public class Pool
         }   
     }
 
-    private void GetTileFromFactory()
+    private void GetObjectFromFactory()
     {
         poolQueue.Enqueue(_factory.CreateTile());
     }

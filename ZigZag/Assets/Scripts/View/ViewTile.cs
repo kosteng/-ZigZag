@@ -8,6 +8,5 @@ public class ViewTile : MonoBehaviour
     {
         if (other.tag == "BorderBackToPool")
             use = !use;
-    }
-    
+    }   
 }

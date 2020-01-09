@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class RoadBuilder 
 {
+    private Factory _factory;
     private bool _direction = true;
     private Vector3 _lostPosition;
-    public Pool poolTile;
-    public Pool poolCoin;
+    private Pool _poolTile;
     public List<ViewTile> tilesOnScene;
     
-    public RoadBuilder (Pool poolTile, Pool poolCoin)
+    public RoadBuilder (Pool poolTile, Factory factory)
     {
         tilesOnScene = new List<ViewTile>();
-        this.poolTile = poolTile;
-        this.poolCoin = poolCoin;
-    }
-
-    public ViewTile Build ()
-    {
-        return poolTile.GetTile();
+        _poolTile = poolTile;
+        _factory = factory;
     }
 
     public void BuildStartingPlatform(int countX, int countZ)
@@ -27,45 +22,61 @@ public class RoadBuilder
         for (int x = -countX; x <= countX; x++)
             for (int z = -countZ; z <= countZ; z++)
             {
-                tilesOnScene.Add(Build());
+                tilesOnScene.Add(GetTileFromPool());
                 tilesOnScene.LastOrDefault().transform.position = new Vector3(x, 0, z);
                 _lostPosition = tilesOnScene.LastOrDefault().transform.position;                
             }
     }
 
-    public void BuildRoad(int count)
+    public void SetDirectionRoad(int count)
     {
         if (_direction)
-            CalcPositionZ(count);
+            SetPositionTiles(count, _direction);
         if(!_direction)
-            CalcPositionX(count);
+            SetPositionTiles(count, _direction);
         _direction = !_direction;
     }
 
-    private void CalcPositionX (int count)
+    public void BackToPool()
     {
-        var rndCoint = Random.Range(1, count);
-        for (int i = 1; i <= count; i++)
+        for (int i = 0; i < tilesOnScene.Count; i++)
         {
-            _lostPosition.x++;
-            tilesOnScene.Add(Build());
-            tilesOnScene.LastOrDefault().transform.position = _lostPosition;
-            if (i == rndCoint)
-                poolCoin.GetTile();
+            if (tilesOnScene[i].use)
+            {
+                tilesOnScene[i].use = !tilesOnScene[i].use;
+                tilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
+                _poolTile.poolQueue.Enqueue(tilesOnScene[i]);
+                tilesOnScene.RemoveAt(i);
+            }
         }
     }
 
-    private void CalcPositionZ(int count)
+    public void CreateRoad(int countTiles)
     {
-        for (int i = 1; i <= count; i++)
+        while (tilesOnScene.Count < countTiles)
         {
-            _lostPosition.z++;
-            tilesOnScene.Add(Build());
-            tilesOnScene.LastOrDefault().transform.position = _lostPosition;
+            var rndCountTile = Random.Range(1, 5);
+            SetDirectionRoad(rndCountTile);
         }
     }
-    public void RemoveAtToList (int i)
+    private ViewTile GetTileFromPool()
     {
-        tilesOnScene.RemoveAt(i);
+        return _poolTile.GetObjectFromPool();
+    }
+
+    private void SetPositionTiles(int countTiles, bool direction)
+    {
+        var rndCoint = Random.Range(1, countTiles);
+        for (int i = 1; i <= countTiles; i++)
+        {
+            if (direction)
+                _lostPosition.z++;
+            else
+                _lostPosition.x++;
+            tilesOnScene.Add(GetTileFromPool());
+            tilesOnScene.LastOrDefault().transform.position = _lostPosition;
+            if (i == rndCoint)
+                tilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 }

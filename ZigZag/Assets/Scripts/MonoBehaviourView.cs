@@ -5,5 +5,5 @@ public class MonoBehaviourView : MonoBehaviour
     public ViewSphere ViewSphere;
     public ViewTile ViewTile;
     public Factory Factory;
-    public ViewCoin ViewCoin;
+    public ViewUI ViewUI;
 }

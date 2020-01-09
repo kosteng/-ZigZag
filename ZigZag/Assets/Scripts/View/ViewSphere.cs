@@ -7,7 +7,7 @@ public class ViewSphere : MonoBehaviour
     private bool _start = false;
     private int _leftMouseButton = 0;
 
-    public int countUseTile;
+    public int collectedCoinCount = 0;
     public void Move(float deltaTime)
     {
 
@@ -25,6 +25,15 @@ public class ViewSphere : MonoBehaviour
         if (_start && !_direction)
         {
             transform.Translate(Vector3.right * deltaTime * _speed);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            collectedCoinCount++;
         }
     }
 }
