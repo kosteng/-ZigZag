@@ -6,9 +6,13 @@
     {
         _viewSphere = viewSphere;
     }
-
-    public void OnUpdate (float deltaTime)
+    public void Start ()
     {
+        _viewSphere.Start();
+    }
+    public void Update (float deltaTime)
+    {
+        _viewSphere.Update();
         _viewSphere.Move(deltaTime);
     }
 }

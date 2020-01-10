@@ -14,17 +14,19 @@
         _roadBuilder = new RoadBuilder(_poolTile, _monoBehaviourView.Factory);
         _sphereController = new SphereController(_monoBehaviourView.ViewSphere);
         _tileController = new TileController(_roadBuilder);
-        _UIController = new UIController(_monoBehaviourView.ViewUI);
+        _UIController = new UIController(_monoBehaviourView.ViewUI, _monoBehaviourView.ViewSphere);
     }
 
     public void Start()
     {
         _tileController.Start();
+        _UIController.Start();
     }
 
     public void Update(float deltaTime)
     {
-        _sphereController.OnUpdate(deltaTime);
+        _sphereController.Update(deltaTime);
         _tileController.Update(deltaTime);
+        _UIController.Update();
     }
 }
