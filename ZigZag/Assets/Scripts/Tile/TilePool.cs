@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 
-public class Pool 
+public class TilePool 
 {
-    private Factory _factory;
-    public Queue<ViewTile> poolQueue = new Queue<ViewTile>();
+    private TileFactory _tileFactory;
+    public Queue<TileView> poolQueue = new Queue<TileView>();
 
-    public Pool(Factory factory)
+    public TilePool(TileFactory tileFactory)
     {
-        _factory = factory;
+        _tileFactory = tileFactory;
     }
 
-    public ViewTile GetObjectFromPool()
+    public TileView GetObjectFromPool()
     {
         if (poolQueue.Count == 0)
         {
@@ -25,7 +25,7 @@ public class Pool
 
     private void GetObjectFromFactory()
     {
-        poolQueue.Enqueue(_factory.CreateTile());
+        poolQueue.Enqueue(_tileFactory.Create());
     }
 
 }

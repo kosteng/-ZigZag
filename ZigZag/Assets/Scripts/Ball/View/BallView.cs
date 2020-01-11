@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ViewSphere : MonoBehaviour
+public class BallView : MonoBehaviour
 {
     [SerializeField] private float _speed = 1f;
     private bool _direction = false;

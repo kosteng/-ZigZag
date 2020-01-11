@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ViewUI : MonoBehaviour
+public class UIView : MonoBehaviour
 {
     public Text coinCountText;
     public Text tapToPlayText;

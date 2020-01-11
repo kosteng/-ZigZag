@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad75183d3b7680149847930d3440aa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monoBehaviourView: {fileID: 996601058}
+  _monoBehaviourServiceLocator: {fileID: 996601058}
 --- !u!4 &850017346
 Transform:
   m_ObjectHideFlags: 0
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 996601057}
   - component: {fileID: 996601058}
   m_Layer: 0
-  m_Name: MonoBehaviourView
+  m_Name: MonoBehaviourServiceLocator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,11 +698,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0597eefe222776846ab5b59f157329cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSphere: {fileID: 1231398711}
-  ViewTile: {fileID: 1730637478019042030, guid: 7d66484c573991042bf9313ff9573050,
+  BallView: {fileID: 1231398711}
+  TileView: {fileID: 1730637478019042030, guid: 7d66484c573991042bf9313ff9573050,
     type: 3}
-  Factory: {fileID: 915792674}
-  ViewUI: {fileID: 1458415060}
+  TileFactory: {fileID: 915792674}
+  UIView: {fileID: 1458415060}
 --- !u!1 &1108608855
 GameObject:
   m_ObjectHideFlags: 0

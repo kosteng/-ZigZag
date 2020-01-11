@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class RoadBuilder 
 {
-    private Factory _factory;
+    private TileFactory _tileFactory;
     private bool _direction = true;
     private Vector3 _lostPosition;
-    private Pool _poolTile;
-    public List<ViewTile> tilesOnScene;
+    private TilePool _tilePool;
+    public List<TileView> tilesOnScene;
     
-    public RoadBuilder (Pool poolTile, Factory factory)
+    public RoadBuilder (TilePool tilePool, TileFactory factory)
     {
-        tilesOnScene = new List<ViewTile>();
-        _poolTile = poolTile;
-        _factory = factory;
+        tilesOnScene = new List<TileView>();
+        _tilePool = tilePool;
+        _tileFactory = factory;
     }
 
     public void BuildStartingPlatform(int countX, int countZ)
@@ -45,7 +45,7 @@ public class RoadBuilder
             {
                 tilesOnScene[i].use = !tilesOnScene[i].use;
                 tilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
-                _poolTile.poolQueue.Enqueue(tilesOnScene[i]);
+                _tilePool.poolQueue.Enqueue(tilesOnScene[i]);
                 tilesOnScene.RemoveAt(i);
             }
         }
@@ -59,9 +59,9 @@ public class RoadBuilder
             SetDirectionRoad(rndCountTile);
         }
     }
-    private ViewTile GetTileFromPool()
+    private TileView GetTileFromPool()
     {
-        return _poolTile.GetObjectFromPool();
+        return _tilePool.GetObjectFromPool();
     }
 
     private void SetPositionTiles(int countTiles, bool direction)

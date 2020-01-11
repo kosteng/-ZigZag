@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ProjectInstaller : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviourView _monoBehaviourView;
+    [SerializeField] private MonoBehaviourServiceLocator _monoBehaviourServiceLocator;
 
     private ProjectInfrastructure _infrastructure;
 
     private void Awake()
     {
-        _infrastructure = new ProjectInfrastructure(_monoBehaviourView);
+        _infrastructure = new ProjectInfrastructure(_monoBehaviourServiceLocator);
     }
 
     private void Start()

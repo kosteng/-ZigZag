@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ViewTile : MonoBehaviour
+public class TileView : MonoBehaviour
 {
     public bool use = false;
 
