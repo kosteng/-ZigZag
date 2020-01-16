@@ -6,6 +6,7 @@
     private readonly TilePool _tilePool;
     private readonly RoadBuilder _roadBuilder;
     private readonly UIController _UIController;
+    private readonly GameplayController _gameplayController;
     
     public ProjectInfrastructure(MonoBehaviourServiceLocator monoBehaviourServiceLocator)
     {
@@ -15,12 +16,15 @@
         _ballController = new BallController(_monoBehaviourServiceLocator.BallView);
         _tileController = new TileController(_roadBuilder);
         _UIController = new UIController(_monoBehaviourServiceLocator.UIView, _monoBehaviourServiceLocator.BallView);
+        _gameplayController = new GameplayController(_ballController, _tileController, _UIController);
     }
 
     public void Start()
     {
         _tileController.Start();
         _UIController.Start();
+        _ballController.Start();
+        _gameplayController.Start();
     }
 
     public void Update(float deltaTime)
@@ -28,5 +32,6 @@
         _ballController.Update(deltaTime);
         _tileController.Update(deltaTime);
         _UIController.Update();
+        _gameplayController.Update();
     }
 }

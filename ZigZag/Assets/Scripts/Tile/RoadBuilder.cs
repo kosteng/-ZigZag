@@ -30,10 +30,7 @@ public class RoadBuilder
 
     public void SetDirectionRoad(int count)
     {
-        if (_direction)
-            SetPositionTiles(count, _direction);
-        if(!_direction)
-            SetPositionTiles(count, _direction);
+        SetPositionTiles(count, _direction);
         _direction = !_direction;
     }
 

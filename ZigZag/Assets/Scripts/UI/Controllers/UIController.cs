@@ -17,7 +17,7 @@
     
     public void Update()
     {
-        if (_ballView.start && _UIView.tapToPlayText.gameObject.activeSelf)
+    //    if (_ballView.start && _UIView.tapToPlayText.gameObject.activeSelf)
             _UIView.tapToPlayText.gameObject.SetActive(false);
         _UIView.coinCountText.text ="Coins: " + _ballView.collectedCoinCount;
         if(_ballView.gameOver)
