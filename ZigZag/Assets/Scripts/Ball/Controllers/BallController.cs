@@ -1,12 +1,11 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BallController 
 {
     private readonly BallView _ballView;
     private bool _direction;
     private bool _start;
+    public int collectedCoinCount = 0;
     public event Action OnGameOver;
 
     public BallController(BallView ballView)
@@ -16,8 +15,9 @@ public class BallController
 
     public void Start()
     {
-        _ballView.Start();
+        _ballView.OnStart();
         _ballView.OnGameOver += GameOver;
+        _ballView.OnCollisionCoin += CoinCollect;
     }
 
     public void GameOver ()
@@ -27,7 +27,7 @@ public class BallController
     }
     public void Update(float deltaTime)
     {
-        _ballView.Update();
+        _ballView.OnUpdate();
         _ballView.Move(deltaTime, _direction, _start);
     }
 
@@ -35,5 +35,10 @@ public class BallController
     {
         _direction = direction;
         _start = start;
+    }
+
+    public void CoinCollect()
+    {
+        collectedCoinCount++;
     }
 }

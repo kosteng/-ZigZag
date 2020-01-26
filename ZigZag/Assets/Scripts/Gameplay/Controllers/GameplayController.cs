@@ -3,51 +3,59 @@ using UnityEngine.SceneManagement;
 
 public class GameplayController 
 {
-    private bool _direction;
-    private bool _start;
+    private bool _directionMove;
+    private bool _startGame;
     private bool _gameOver;
-    private const int _leftMouseButton = 0;
+    private const int LeftMouseButton = 0;
 
     private readonly BallController _ballController;
-    private readonly TileController _tileController;
     private readonly UIController _UIController;
 
-    public GameplayController (BallController ballController, 
-                               TileController tileController,
-                               UIController UIController)
+    public GameplayController (BallController ballController, UIController UIController)
     {
         _ballController = ballController;
-        _tileController = tileController;
         _UIController = UIController;
     }
 
     public void Start()
     {
         _ballController.OnGameOver += GameOver;
+        _UIController.ShowTapToPlayText(true);
     }
 
     public void GameOver()
     {
         _gameOver = true;
+        _UIController.GameOver();
         _ballController.OnGameOver -= GameOver;
     }
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(_leftMouseButton))
+        if (Input.GetMouseButtonDown(LeftMouseButton))
         {
-            _start = true;
-            _direction = !_direction;
-            _ballController.SetDataGame(_direction, _start);
+            if (!_startGame)
+            {             
+                _startGame = true;
+                _UIController.ShowTapToPlayText(false);
+            }
+            _directionMove = !_directionMove;
+            _ballController.SetDataGame(_directionMove, _startGame);
         }
 
         if (_gameOver)
         {
-            Time.timeScale = 0;
-            if (Input.GetMouseButtonDown(_leftMouseButton) && _gameOver)
-            {
-                SceneManager.LoadScene(0);
-            }
+            Restart();
+        }
+        _UIController.UpdateCoin(_ballController.collectedCoinCount);
+    }
+
+    private void Restart()
+    {
+        Time.timeScale = 0;
+        if (Input.GetMouseButtonDown(LeftMouseButton) && _gameOver)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

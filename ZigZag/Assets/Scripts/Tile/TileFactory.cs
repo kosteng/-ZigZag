@@ -7,7 +7,7 @@ public class TileFactory : MonoBehaviour
 
     public TileView Create()
     {
-        var tile = Instantiate(_tile, new Vector3(0, 10, 0), Quaternion.identity);
+        var tile = Instantiate(_tile, new Vector3(0f, 10f, 0f), Quaternion.identity);
         SetParent(tile);
         return tile;  
     }

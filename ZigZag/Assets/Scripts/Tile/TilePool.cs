@@ -10,11 +10,11 @@ public class TilePool
         _tileFactory = tileFactory;
     }
 
-    public TileView GetObjectFromPool()
+    public TileView GetObject()
     {
         if (poolQueue.Count == 0)
         {
-            GetObjectFromFactory();        
+            poolQueue.Enqueue(_tileFactory.Create());
             return poolQueue.Dequeue();
         }
         else
@@ -23,9 +23,9 @@ public class TilePool
         }   
     }
 
-    private void GetObjectFromFactory()
+    public void Back (TileView tile)
     {
-        poolQueue.Enqueue(_tileFactory.Create());
+        poolQueue.Enqueue(tile);
     }
 
 }

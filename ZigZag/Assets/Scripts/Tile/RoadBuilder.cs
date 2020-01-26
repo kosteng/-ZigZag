@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class RoadBuilder 
 {
-    private TileFactory _tileFactory;
     private bool _direction = true;
     private Vector3 _lostPosition;
-    private TilePool _tilePool;
+    private readonly TilePool _tilePool;
     public List<TileView> tilesOnScene;
     
-    public RoadBuilder (TilePool tilePool, TileFactory factory)
+    public RoadBuilder (TilePool tilePool)
     {
         tilesOnScene = new List<TileView>();
         _tilePool = tilePool;
-        _tileFactory = factory;
     }
 
     public void BuildStartingPlatform(int countX, int countZ)
@@ -22,7 +20,7 @@ public class RoadBuilder
         for (int x = -countX; x <= countX; x++)
             for (int z = -countZ; z <= countZ; z++)
             {
-                tilesOnScene.Add(GetTileFromPool());
+                tilesOnScene.Add(_tilePool.GetObject());
                 tilesOnScene.LastOrDefault().transform.position = new Vector3(x, 0, z);
                 _lostPosition = tilesOnScene.LastOrDefault().transform.position;                
             }
@@ -42,7 +40,7 @@ public class RoadBuilder
             {
                 tilesOnScene[i].use = !tilesOnScene[i].use;
                 tilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
-                _tilePool.poolQueue.Enqueue(tilesOnScene[i]);
+                _tilePool.Back(tilesOnScene[i]); 
                 tilesOnScene.RemoveAt(i);
             }
         }
@@ -52,28 +50,30 @@ public class RoadBuilder
     {
         while (tilesOnScene.Count < countTiles)
         {
-            var rndCountTile = Random.Range(1, 5);
+            int rndCountTile = Random.Range(1, 6);
             SetDirectionRoad(rndCountTile);
         }
     }
-    private TileView GetTileFromPool()
-    {
-        return _tilePool.GetObjectFromPool();
-    }
-
+  
     private void SetPositionTiles(int countTiles, bool direction)
     {
         var rndCoint = Random.Range(1, countTiles);
         for (int i = 1; i <= countTiles; i++)
         {
             if (direction)
+            {
                 _lostPosition.z++;
+            }
             else
+            {
                 _lostPosition.x++;
-            tilesOnScene.Add(GetTileFromPool());
+            }
+            tilesOnScene.Add(_tilePool.GetObject());
             tilesOnScene.LastOrDefault().transform.position = _lostPosition;
             if (i == rndCoint)
+            {
                 tilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
+            }
         }
     }
 }

@@ -12,11 +12,11 @@
     {
         _monoBehaviourServiceLocator = monoBehaviourServiceLocator;
         _tilePool = new TilePool(_monoBehaviourServiceLocator.TileFactory);
-        _roadBuilder = new RoadBuilder(_tilePool, _monoBehaviourServiceLocator.TileFactory);
+        _roadBuilder = new RoadBuilder(_tilePool);
         _ballController = new BallController(_monoBehaviourServiceLocator.BallView);
         _tileController = new TileController(_roadBuilder);
-        _UIController = new UIController(_monoBehaviourServiceLocator.UIView, _monoBehaviourServiceLocator.BallView);
-        _gameplayController = new GameplayController(_ballController, _tileController, _UIController);
+        _UIController = new UIController(_monoBehaviourServiceLocator.UIView);
+        _gameplayController = new GameplayController(_ballController, _UIController);
     }
 
     public void Start()
@@ -31,7 +31,6 @@
     {
         _ballController.Update(deltaTime);
         _tileController.Update(deltaTime);
-        _UIController.Update();
         _gameplayController.Update();
     }
 }

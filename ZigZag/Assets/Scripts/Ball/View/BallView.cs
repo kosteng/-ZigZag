@@ -5,10 +5,10 @@ public class BallView : MonoBehaviour
 {
     [SerializeField] private float _speed = 1f;
     public bool gameOver = false;
-    public int collectedCoinCount = 0;
     public event Action OnGameOver;
+    public event Action OnCollisionCoin;
 
-    public void Update()
+    public void OnUpdate()
     {
         if (!Physics.Raycast(transform.position, Vector3.down, 4f))
         {
@@ -17,7 +17,7 @@ public class BallView : MonoBehaviour
         }
     }
 
-    public void Start()
+    public void OnStart()
     {
         transform.position = new Vector3(0, 1.9125f, 0);
         gameOver = false;
@@ -42,7 +42,7 @@ public class BallView : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             other.gameObject.SetActive(false);
-            collectedCoinCount++;
+            OnCollisionCoin?.Invoke();
         }
     }
 }
