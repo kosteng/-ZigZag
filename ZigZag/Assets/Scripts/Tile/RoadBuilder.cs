@@ -5,13 +5,13 @@ using UnityEngine;
 public class RoadBuilder 
 {
     private bool _direction = true;
-    private Vector3 _lostPosition;
+    private Vector3 _lastPosition;
     private readonly TilePool _tilePool;
-    public List<TileView> tilesOnScene;
+    public List<TileView> TilesOnScene;
     
     public RoadBuilder (TilePool tilePool)
     {
-        tilesOnScene = new List<TileView>();
+        TilesOnScene = new List<TileView>();
         _tilePool = tilePool;
     }
 
@@ -20,9 +20,10 @@ public class RoadBuilder
         for (int x = -countX; x <= countX; x++)
             for (int z = -countZ; z <= countZ; z++)
             {
-                tilesOnScene.Add(_tilePool.GetObject());
-                tilesOnScene.LastOrDefault().transform.position = new Vector3(x, 0, z);
-                _lostPosition = tilesOnScene.LastOrDefault().transform.position;                
+                var tile = _tilePool.GetObject();
+                tile.transform.position = new Vector3(x, 0, z);
+                _lastPosition = tile.transform.position;
+                TilesOnScene.Add(tile);
             }
     }
 
@@ -34,21 +35,21 @@ public class RoadBuilder
 
     public void BackToPool()
     {
-        for (int i = 0; i < tilesOnScene.Count; i++)
+        for (int i = 0; i < TilesOnScene.Count; i++)
         {
-            if (tilesOnScene[i].use)
+            if (TilesOnScene[i].use)
             {
-                tilesOnScene[i].use = !tilesOnScene[i].use;
-                tilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
-                _tilePool.Back(tilesOnScene[i]); 
-                tilesOnScene.RemoveAt(i);
+                TilesOnScene[i].use = !TilesOnScene[i].use;
+                TilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
+                _tilePool.Back(TilesOnScene[i]); 
+                TilesOnScene.RemoveAt(i);
             }
         }
     }
 
     public void CreateRoad(int countTiles)
     {
-        while (tilesOnScene.Count < countTiles)
+        while (TilesOnScene.Count < countTiles)
         {
             int rndCountTile = Random.Range(1, 6);
             SetDirectionRoad(rndCountTile);
@@ -62,17 +63,17 @@ public class RoadBuilder
         {
             if (direction)
             {
-                _lostPosition.z++;
+                _lastPosition.z++;
             }
             else
             {
-                _lostPosition.x++;
+                _lastPosition.x++;
             }
-            tilesOnScene.Add(_tilePool.GetObject());
-            tilesOnScene.LastOrDefault().transform.position = _lostPosition;
+            TilesOnScene.Add(_tilePool.GetObject());
+            TilesOnScene.LastOrDefault().transform.position = _lastPosition;
             if (i == rndCoint)
             {
-                tilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
+                TilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
             }
         }
     }
