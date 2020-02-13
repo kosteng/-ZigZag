@@ -37,13 +37,11 @@ public class RoadBuilder
     {
         for (int i = 0; i < TilesOnScene.Count; i++)
         {
-            if (TilesOnScene[i].use)
-            {
-                TilesOnScene[i].use = !TilesOnScene[i].use;
-                TilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
-                _tilePool.Back(TilesOnScene[i]); 
-                TilesOnScene.RemoveAt(i);
-            }
+            if (!TilesOnScene[i].use) return;
+            TilesOnScene[i].use = !TilesOnScene[i].use;
+            TilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
+            _tilePool.Back(TilesOnScene[i]); 
+            TilesOnScene.RemoveAt(i);           
         }
     }
 
