@@ -640,7 +640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 1108608855}
-  _tile: {fileID: 1730637478019042030, guid: 7d66484c573991042bf9313ff9573050, type: 3}
+  _tilePrefab: {fileID: 1730637478019042030, guid: 7d66484c573991042bf9313ff9573050,
+    type: 3}
 --- !u!4 &915792675
 Transform:
   m_ObjectHideFlags: 0

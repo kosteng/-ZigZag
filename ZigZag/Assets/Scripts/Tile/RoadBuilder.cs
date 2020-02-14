@@ -67,8 +67,10 @@ public class RoadBuilder
             {
                 _lastPosition.x++;
             }
-            TilesOnScene.Add(_tilePool.GetObject());
-            TilesOnScene.LastOrDefault().transform.position = _lastPosition;
+            var tile = _tilePool.GetObject();
+
+            tile.transform.position = _lastPosition;
+            TilesOnScene.Add(tile);
             if (i == rndCoint)
             {
                 TilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
