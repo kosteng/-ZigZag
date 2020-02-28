@@ -92,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de9f18b8cfde6b4a9b9aa84e61d5bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  use: 0
+  Use: 0
+  Coin: {fileID: 3004094725820094817}
 --- !u!65 &3360414172261918529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,6 +186,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebdd220c80eea4146bca5cad9106686c, type: 3}
+--- !u!1 &3004094725820094817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3552747458313768237, guid: ebdd220c80eea4146bca5cad9106686c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1800688617838302284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3004094725820094821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3552747458313768233, guid: ebdd220c80eea4146bca5cad9106686c,

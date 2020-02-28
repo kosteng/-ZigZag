@@ -2,11 +2,12 @@
 
 public class TileView : MonoBehaviour
 {
-    public bool use = false;
+    public bool Use = false;
+	public GameObject Coin;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "BorderBackToPool")
-            use = !use;
+            Use = !Use;
     }   
 }

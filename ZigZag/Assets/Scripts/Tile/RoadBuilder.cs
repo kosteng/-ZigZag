@@ -37,9 +37,9 @@ public class RoadBuilder
     {
         for (int i = 0; i < TilesOnScene.Count; i++)
         {
-            if (!TilesOnScene[i].use) return;
-            TilesOnScene[i].use = !TilesOnScene[i].use;
-            TilesOnScene[i].transform.GetChild(0).gameObject.SetActive(false);
+            if (!TilesOnScene[i].Use) return;
+            TilesOnScene[i].Use = !TilesOnScene[i].Use;
+			TilesOnScene[i].Coin.SetActive(false);
             _tilePool.Back(TilesOnScene[i]); 
             TilesOnScene.RemoveAt(i);           
         }
@@ -70,11 +70,12 @@ public class RoadBuilder
             var tile = _tilePool.GetObject();
 
             tile.transform.position = _lastPosition;
-            TilesOnScene.Add(tile);
+            
             if (i == rndCoint)
             {
-                TilesOnScene.LastOrDefault().transform.GetChild(0).gameObject.SetActive(true);
+				tile.Coin.SetActive(true);
             }
-        }
+			TilesOnScene.Add(tile);
+		}
     }
 }
