@@ -54,21 +54,14 @@ public class RoadBuilder
         }
     }
   
-    private void SetPositionTiles(int countTiles, bool direction)
+    private void SetPositionTiles(int countTiles, bool isUp)
     {
         var rndCoint = Random.Range(1, countTiles);
         for (int i = 1; i <= countTiles; i++)
         {
-            if (direction)
-            {
-                _lastPosition.z++;
-            }
-            else
-            {
-                _lastPosition.x++;
-            }
-            var tile = _tilePool.GetObject();
+            _lastPosition += isUp ? Vector3.forward : Vector3.right;
 
+            var tile = _tilePool.GetObject();
             tile.transform.position = _lastPosition;
             
             if (i == rndCoint)
