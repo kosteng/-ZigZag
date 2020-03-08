@@ -56,13 +56,13 @@ public class RoadBuilder
   
     private void SetPositionTiles(int countTiles, bool isUp)
     {
-        var rndCoint = Random.Range(1, countTiles);
+        var randomPositionCoinFromTile = Random.Range(1, countTiles);
         for (int i = 1; i <= countTiles; i++)
         {
              _lastPosition += isUp ? Vector3.forward : Vector3.right;          
             var tile = _tilePool.GetObject();
             tile.transform.position = _lastPosition; 
-            if (i == rndCoint) 
+            if (i == randomPositionCoinFromTile) 
 				tile.CoinOnTile.SetActive(true);      
 			TilesOnScene.Add(tile);
 		}
