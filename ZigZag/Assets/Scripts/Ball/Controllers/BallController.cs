@@ -6,7 +6,7 @@ public class BallController
     private bool _direction;
     private bool _start;
     public int collectedCoinCount = 0;
-    public event Action OnGameOver;
+    public event Action OnBallFall;
 
     public BallController(BallView ballView)
     {
@@ -16,14 +16,14 @@ public class BallController
     public void Start()
     {
         _ballView.OnStart();
-        _ballView.OnGameOver += GameOver;
+        _ballView.OnBallFall+= BallFall;
         _ballView.OnCollisionCoin += CoinCollect;
     }
 
-    public void GameOver ()
+    public void BallFall ()
     {
-        OnGameOver?.Invoke();
-        _ballView.OnGameOver -= GameOver;
+        OnBallFall?.Invoke();
+        _ballView.OnBallFall -= BallFall;
     }
     public void Update(float deltaTime)
     {

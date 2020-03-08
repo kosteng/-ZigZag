@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad75183d3b7680149847930d3440aa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monoBehaviourServiceLocator: {fileID: 996601058}
+  _monoBehaviourServiceLocator: {fileID: 996601059}
 --- !u!4 &850017346
 Transform:
   m_ObjectHideFlags: 0
@@ -665,9 +665,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996601057}
-  - component: {fileID: 996601058}
+  - component: {fileID: 996601059}
   m_Layer: 0
-  m_Name: MonoBehaviourServiceLocator
+  m_Name: MonoBehaviourContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -687,7 +687,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &996601058
+--- !u!114 &996601059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 996601056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0597eefe222776846ab5b59f157329cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c22eb627f2d8654e8e4afa7d7a26a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BallView: {fileID: 1231398711}
@@ -902,7 +902,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  gameOver: 0
 --- !u!1 &1458415058
 GameObject:
   m_ObjectHideFlags: 0

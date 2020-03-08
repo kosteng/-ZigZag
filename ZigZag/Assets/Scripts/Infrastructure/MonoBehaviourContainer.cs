@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MonoBehaviourServiceLocator : MonoBehaviour
+public class MonoBehaviourContainer : MonoBehaviour
 {
     public BallView BallView;
     public TileView TileView;

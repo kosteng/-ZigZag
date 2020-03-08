@@ -2,7 +2,7 @@
 
 public class ProjectInstaller : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviourServiceLocator _monoBehaviourServiceLocator;
+    [SerializeField] private MonoBehaviourContainer _monoBehaviourServiceLocator;
 
     private ProjectInfrastructure _infrastructure;
 

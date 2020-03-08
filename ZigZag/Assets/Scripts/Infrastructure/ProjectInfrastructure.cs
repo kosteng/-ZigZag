@@ -1,6 +1,6 @@
 ﻿public class ProjectInfrastructure
 {
-    private readonly MonoBehaviourServiceLocator _monoBehaviourServiceLocator;
+    private readonly MonoBehaviourContainer _monoBehaviourContainer;
     private readonly BallController _ballController;
     private readonly TileController _tileController;
     private readonly TilePool _tilePool;
@@ -8,14 +8,14 @@
     private readonly UIController _UIController;
     private readonly GameplayController _gameplayController;
     
-    public ProjectInfrastructure(MonoBehaviourServiceLocator monoBehaviourServiceLocator)
+    public ProjectInfrastructure(MonoBehaviourContainer monoBehaviourContainer)
     {
-        _monoBehaviourServiceLocator = monoBehaviourServiceLocator;
-        _tilePool = new TilePool(_monoBehaviourServiceLocator.TileFactory);
+        _monoBehaviourContainer = monoBehaviourContainer;
+        _tilePool = new TilePool(monoBehaviourContainer.TileFactory);
         _roadBuilder = new RoadBuilder(_tilePool);
-        _ballController = new BallController(_monoBehaviourServiceLocator.BallView);
+        _ballController = new BallController(monoBehaviourContainer.BallView);
         _tileController = new TileController(_roadBuilder);
-        _UIController = new UIController(_monoBehaviourServiceLocator.UIView);
+        _UIController = new UIController(monoBehaviourContainer.UIView);
         _gameplayController = new GameplayController(_ballController, _UIController);
     }
 

@@ -8,17 +8,17 @@ public class RoadBuilder
     private Vector3 _lastPosition;
     private readonly TilePool _tilePool;
     public List<TileView> TilesOnScene;
-    
+    public int Count => TilesOnScene.Count;
     public RoadBuilder (TilePool tilePool)
     {
         TilesOnScene = new List<TileView>();
         _tilePool = tilePool;
     }
 
-    public void BuildStartingPlatform(int countX, int countZ)
+    public void BuildStartingPlatform(int sizeStartingPlatform)
     {
-        for (int x = -countX; x <= countX; x++)
-            for (int z = -countZ; z <= countZ; z++)
+        for (int x = -sizeStartingPlatform; x <= sizeStartingPlatform; x++)
+            for (int z = -sizeStartingPlatform; z <= sizeStartingPlatform; z++)
             {
                 var tile = _tilePool.GetObject();
                 tile.transform.position = new Vector3(x, 0, z);
@@ -37,9 +37,9 @@ public class RoadBuilder
     {
         for (int i = 0; i < TilesOnScene.Count; i++)
         {
-            if (!TilesOnScene[i].Use) return;
-            TilesOnScene[i].Use = !TilesOnScene[i].Use;
-			TilesOnScene[i].Coin.SetActive(false);
+            if (!TilesOnScene[i].UseTile) return;
+            TilesOnScene[i].UseTile = !TilesOnScene[i].UseTile;
+			TilesOnScene[i].CoinOnTile.SetActive(false);
             _tilePool.Back(TilesOnScene[i]); 
             TilesOnScene.RemoveAt(i);           
         }
@@ -59,15 +59,11 @@ public class RoadBuilder
         var rndCoint = Random.Range(1, countTiles);
         for (int i = 1; i <= countTiles; i++)
         {
-            _lastPosition += isUp ? Vector3.forward : Vector3.right;
-
+             _lastPosition += isUp ? Vector3.forward : Vector3.right;          
             var tile = _tilePool.GetObject();
-            tile.transform.position = _lastPosition;
-            
-            if (i == rndCoint)
-            {
-				tile.Coin.SetActive(true);
-            }
+            tile.transform.position = _lastPosition; 
+            if (i == rndCoint) 
+				tile.CoinOnTile.SetActive(true);      
 			TilesOnScene.Add(tile);
 		}
     }

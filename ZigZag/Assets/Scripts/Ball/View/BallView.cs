@@ -4,37 +4,30 @@ using UnityEngine;
 public class BallView : MonoBehaviour
 {
     [SerializeField] private float _speed = 1f;
-    public bool gameOver = false;
-    public event Action OnGameOver;
+    private const float BallStartPosition = 2f;
+    public event Action OnBallFall;
     public event Action OnCollisionCoin;
+    
 
     public void OnUpdate()
     {
         if (!Physics.Raycast(transform.position, Vector3.down, 4f))
         {
-            gameOver = true;
-            OnGameOver?.Invoke();
+            OnBallFall?.Invoke();
         }
     }
 
     public void OnStart()
     {
-        transform.position = new Vector3(0, 1.9125f, 0);
-        gameOver = false;
-        Time.timeScale = 1;
+        transform.position = new Vector3(0, BallStartPosition, 0);
     }
 
-    public void Move(float deltaTime, bool direction, bool start)
+    public void Move(float deltaTime, bool isForward, bool start)
     {
-        if (start && direction)
-        {
-            transform.Translate(Vector3.forward * deltaTime * _speed);
-        }
-
-        if (start && !direction)
-        {
-            transform.Translate(Vector3.right * deltaTime * _speed);
-        }
+        if (start && isForward)      
+            transform.Translate(Vector3.forward * deltaTime * _speed);      
+        if (start && !isForward)       
+            transform.Translate(Vector3.right * deltaTime * _speed);     
     }
 
     private void OnTriggerEnter(Collider other)

@@ -19,15 +19,16 @@ public class GameplayController
 
     public void Start()
     {
-        _ballController.OnGameOver += GameOver;
+        _ballController.OnBallFall += GameOver;
         _UIController.ShowTapToPlayText(true);
+        Time.timeScale = 1;
     }
 
     public void GameOver()
     {
         _gameOver = true;
         _UIController.GameOver();
-        _ballController.OnGameOver -= GameOver;
+        _ballController.OnBallFall -= GameOver;
     }
 
     public void Update()
