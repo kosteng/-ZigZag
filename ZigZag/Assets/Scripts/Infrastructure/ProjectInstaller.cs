@@ -2,13 +2,13 @@
 
 public class ProjectInstaller : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviourContainer _monoBehaviourServiceLocator;
+    [SerializeField] private MonoBehaviourContainer _monoBehaviourContainer;
 
     private ProjectInfrastructure _infrastructure;
 
     private void Awake()
     {
-        _infrastructure = new ProjectInfrastructure(_monoBehaviourServiceLocator);
+        _infrastructure = new ProjectInfrastructure(_monoBehaviourContainer);
     }
 
     private void Start()
